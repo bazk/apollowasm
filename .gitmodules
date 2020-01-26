@@ -1,0 +1,6 @@
+[submodule "virtualagc"]
+	path = virtualagc
+	url = https://github.com/virtualagc/virtualagc.git
+[submodule "moonjs"]
+	path = moonjs
+	url = https://github.com/siravan/moonjs.git
