@@ -7,7 +7,7 @@ const Label = ({ on, text }) => (
     flexDirection="column"
     alignItems="center"
     justifyContent="center"
-    bg={on ? "rgba(0, 255, 0, 0.8)" : "rgba(0, 0, 0, 0.05)"}
+    bg={on ? "displayColor" : "none"}
     p={1}
   >
     {text && text.split(" ").map(t => <Text key={t}>{t}</Text>)}

@@ -21,7 +21,14 @@ const DSKY = ({ agc, dsky }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box fontSize="0.6rem" width="45em" p={4} mx="auto" my={-2} bg="#dedede">
+      <Box
+        fontSize="0.6rem"
+        width="50em"
+        p={4}
+        mx="auto"
+        my={-2}
+        bg="dskyBackground"
+      >
         <Flex py={2} justifyContent="space-between">
           <StatusPanel state={state.status} />
           <DisplayPanel

@@ -14,5 +14,17 @@ export default {
   lineHeights: {
     body: 1,
     heading: 1
+  },
+  colors: {
+    dskyBackground: "#dedede",
+
+    statusBackground: "#cecece",
+    statusBezel: "#dcdcdc",
+    statusWhiteLightOn: "#ffffff",
+    statusYellowLightOn: "#ffff44",
+    statusLightOff: "#b3c1b9",
+
+    displayBackground: "#2a2d29",
+    displayColor: "rgba(191, 251, 111, 0.8)"
   }
 };

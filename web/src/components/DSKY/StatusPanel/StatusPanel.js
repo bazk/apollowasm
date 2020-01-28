@@ -1,16 +1,27 @@
 import React from "react";
 import { Box, Flex } from "rebass";
+import { darken } from "@theme-ui/color";
 
 import Light from "./Light/Light";
 
 const StatusPanel = ({ state, ...props }) => (
-  <Flex mx={-2} {...props} bg="#cecece">
+  <Flex
+    mx={-2}
+    {...props}
+    bg="statusBackground"
+    sx={{
+      borderColor: darken("statusBackground", 0.15),
+      borderStyle: "solid",
+      borderTopWidth: "2px",
+      borderLeftWidth: "2px"
+    }}
+  >
     <Box p={2} my={-1}>
-      <Light my={1} text="UPLINK ACTY" on={state.uplinkActy} />
-      <Light my={1} text="NO ATT" on={state.noAtt} />
-      <Light my={1} text="STBY" on={state.stby} />
-      <Light my={1} text="KEY REL" on={state.keyRel} flashing />
-      <Light my={1} text="OPR ERR" on={state.oprErr} flashing />
+      <Light my={1} text="UPLINK ACTY" on={state.uplinkActy} color="white" />
+      <Light my={1} text="NO ATT" on={state.noAtt} color="white" />
+      <Light my={1} text="STBY" on={state.stby} color="white" />
+      <Light my={1} text="KEY REL" on={state.keyRel} flashing color="white" />
+      <Light my={1} text="OPR ERR" on={state.oprErr} flashing color="white" />
       <Light my={1} text="" />
       <Light my={1} text="" />
     </Box>

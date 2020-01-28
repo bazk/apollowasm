@@ -1,11 +1,23 @@
 import React from "react";
 import { Flex } from "rebass";
+import { darken } from "@theme-ui/color";
 
 import Digit from "./Digit/Digit";
 import Label from "./Label/Label";
 
 const DisplayPanel = ({ activity, flashing, state, ...props }) => (
-  <Flex p={1} flexDirection="column" bg="#2a2d29" {...props}>
+  <Flex
+    p={2}
+    flexDirection="column"
+    bg="displayBackground"
+    sx={{
+      borderColor: darken("displayBackground", 0.15),
+      borderStyle: "solid",
+      borderTopWidth: "2px",
+      borderLeftWidth: "2px"
+    }}
+    {...props}
+  >
     <Flex justifyContent="space-between">
       <Flex width={1 / 2} flexDirection="column" justifyContent="center">
         <Label text="COMP ACTY" on={activity} />
