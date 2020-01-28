@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 
 import AGC from "../core/AGC";
 import DSKY from "../core/DSKY";
@@ -10,8 +10,8 @@ const DEG_TO_RAD = Math.PI / 180;
 
 export default function useRocket() {
   const [systems, setSystems] = useState({ ready: false });
-  const [engineRunning, setEngineRunning] = useState(false);
-  const [time, setTime] = useState(0);
+  const engineRunning = useState(false);
+  const time = useRef(0);
 
   useEffect(() => {
     AGC.load().then(agc => {
@@ -30,6 +30,11 @@ export default function useRocket() {
       });
     });
   }, []);
+
+  const launch = useCallback(() => {
+    systems.agc.send(24, 0x0000, 0x0010);
+    engineRunning.current = true;
+  }, [engineRunning, systems]);
 
   useInterval(() => {
     if (!systems.ready) {
@@ -74,8 +79,8 @@ export default function useRocket() {
       }
     }
 
-    if (engineRunning) {
-      const t = Math.round(time / 10);
+    if (engineRunning.current) {
+      const t = Math.round(time.current / 10);
       imu.accelerate([1.08 * profile[t][2], 0, 0]);
       imu.rotate([
         (-profile[t][3] / 10) * DEG_TO_RAD,
@@ -85,11 +90,11 @@ export default function useRocket() {
     }
 
     dsky.update();
-    setTime(time + 1);
-  }, 100);
+    time.current++;
+  }, 1);
 
   return {
     systems,
-    launch: () => setEngineRunning(true)
+    launch
   };
 }
