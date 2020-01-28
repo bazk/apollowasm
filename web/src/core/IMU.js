@@ -1,11 +1,10 @@
-// based on LM_Simulator by Stephan Hotto <stephan.hotto@web.de>
-
 const DEG_TO_RAD = Math.PI / 180;
 const CA_ANGLE = 0.043948 * DEG_TO_RAD;
 const FA_ANGLE = (0.617981 / 3600.0) * DEG_TO_RAD;
 const ANGLE_INCR = (360.0 / 32768) * DEG_TO_RAD;
 const PIPA_INCR = 0.0585; // m/s per each PIPA pulse
 
+// based on LM_Simulator by Stephan Hotto <stephan.hotto@web.de>
 export default class IMU {
   static adjust(x, a, b) {
     return x - (b - a) * Math.floor((x - a) / (b - a));
@@ -21,14 +20,18 @@ export default class IMU {
     this.pimu = [0, 0, 0];
     this.velocity = [0, 0, 0];
     this.pipa = [0, 0, 0];
+
+    for (let axis = 0; axis < 3; axis++) {
+      this.poke(26 + axis, 0x0000);
+    }
   }
 
   peek(mask) {
-    this.agc.scanPort(mask);
+    return this.agc.peek(mask);
   }
 
-  poke(port, value) {
-    this.agc.sendPort(port, value);
+  poke(channel, value) {
+    return this.agc.poke(channel, value);
   }
 
   angle(axis) {

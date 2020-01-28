@@ -4,9 +4,9 @@ import "reset-css";
 
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
-import Main from "./components/Main/Main.js";
+import Rocket from "./components/Rocket/Rocket.js";
 
-ReactDOM.render(<Main />, document.getElementById("root"));
+ReactDOM.render(<Rocket />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

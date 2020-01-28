@@ -1,23 +1,66 @@
 export default class AGC {
   static load() {
-    const cfg = {
-      print: text => {
-        console.log(text);
-      },
-      printErr: error => {
-        console.error(error);
-      }
-    };
-
     return new Promise(resolve => {
-      global.Module(cfg).then(mod => resolve(new AGC(mod)));
+      const Module = {
+        canvas: document.createElement("canvas") || {},
+        setStatus: status => {
+          console.log("status:", status);
+        },
+        print: text => {
+          console.log(text);
+        },
+        printErr: error => {
+          console.error(error);
+        },
+        preRun: [
+          () => {
+            resolve(
+              new AGC({
+                advance: Module.cwrap("advance", "number", []),
+                sendPort: Module.cwrap("sendPort", "number", [
+                  "number",
+                  "number",
+                  "number"
+                ]),
+                scanPort: Module.cwrap("scanPort", "number", ["number"]),
+                peek: Module.cwrap("peek", "number", ["number"]),
+                poke: Module.cwrap("poke", "number", ["number", "number"])
+              })
+            );
+          }
+        ]
+      };
+
+      global.Module = Module;
+
+      const script = document.createElement("script");
+      // script.src = "/agc/agc.js";
+      script.src = "/agc11.js";
+      document.body.append(script);
     });
   }
 
-  constructor(mod) {
-    this.module = mod;
-    this.tick = mod.cwrap("advance", "number", []);
-    this.sendPort = mod.cwrap("sendPort", "number", ["number", "number"]);
-    this.scanPort = mod.cwrap("scanPort", "number", ["number"]);
+  constructor(callbacks) {
+    this.callbacks = callbacks;
+  }
+
+  tick() {
+    return this.callbacks.advance();
+  }
+
+  send(channel, value, mask) {
+    return this.callbacks.sendPort(channel, value, mask);
+  }
+
+  scan(mask) {
+    return this.callbacks.scanPort(mask);
+  }
+
+  peek(address) {
+    return this.callbacks.peek(address);
+  }
+
+  poke(address, value) {
+    return this.callbacks.poke(address, value);
   }
 }
