@@ -12,6 +12,7 @@ export default function useRocket() {
   const [systems, setSystems] = useState({ ready: false });
   const engineRunning = useState(false);
   const time = useRef(0);
+  const engineTime = useRef(0);
 
   useEffect(() => {
     AGC.load().then(agc => {
@@ -80,13 +81,14 @@ export default function useRocket() {
     }
 
     if (engineRunning.current) {
-      const t = Math.round(time.current / 10);
+      const t = Math.round(engineTime.current / 10);
       imu.accelerate([1.08 * profile[t][2], 0, 0]);
       imu.rotate([
         (-profile[t][3] / 10) * DEG_TO_RAD,
         (-profile[t][1] / 10) * DEG_TO_RAD,
         0
       ]);
+      engineTime.current++;
     }
 
     dsky.update();
