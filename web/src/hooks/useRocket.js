@@ -91,7 +91,7 @@ export default function useRocket() {
 
     dsky.update();
     time.current++;
-  }, 1);
+  }, 100);
 
   return {
     systems,
