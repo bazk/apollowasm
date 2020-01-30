@@ -16,12 +16,47 @@ function Rocket() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Flex p={2} height="100vh" alignItems="center" justifyContent="center">
+      <Flex
+        p={2}
+        height="100vh"
+        alignItems="center"
+        justifyContent="center"
+        sx={{
+          "@media screen and (max-width: 768px)": {
+            transform: "scale(0.6)"
+          }
+        }}
+      >
         <Box m={2} flexGrow={0} flexShrink={0}>
           <DSKY agc={systems.agc} dsky={systems.dsky} />
+
+          <Button
+            mt={2}
+            width={1}
+            fontSize={2}
+            onClick={launch}
+            variant="primary"
+            sx={{
+              display: "none",
+              "@media screen and (max-width: 768px)": {
+                display: "block"
+              }
+            }}
+          >
+            Launch
+          </Button>
         </Box>
 
-        <Box m={2} width="25em">
+        <Box
+          m={2}
+          width="25em"
+          sx={{
+            display: "block",
+            "@media screen and (max-width: 768px)": {
+              display: "none"
+            }
+          }}
+        >
           <Checklist
             items={[
               "Enable the IMU",
