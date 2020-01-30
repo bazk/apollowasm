@@ -35,7 +35,9 @@ export default {
       borderRadius: 4,
       boxShadow: "3px 3px 0 #c0392b",
       transition: `all 100ms linear 0s`,
-      "&:hover": {
+      outline: "none",
+      cursor: "pointer",
+      "&:active": {
         transform: "translate(2px, 2px)",
         boxShadow: "1px 1px 0 #c0392b"
       }

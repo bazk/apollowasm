@@ -16,7 +16,7 @@ function Rocket() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Flex m={2} justifyContent="center">
+      <Flex p={2} height="100vh" alignItems="center" justifyContent="center">
         <Box m={2} flexGrow={0} flexShrink={0}>
           <DSKY agc={systems.agc} dsky={systems.dsky} />
         </Box>
