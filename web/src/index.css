@@ -1,4 +1,8 @@
 body {
   font-family: 'Courier Prime', monospace;
   overflow-x: hidden;
+
+  background-color: #0c151d;
+  background-image: url('/img/bg-sky-1080.webp');
+  background-size: cover;
 }
