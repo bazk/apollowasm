@@ -24,6 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "aws2 s3 sync --acl public-read build/ s3://wasm-agc/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
