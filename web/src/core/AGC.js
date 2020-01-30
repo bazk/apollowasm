@@ -34,7 +34,6 @@ export default class AGC {
       global.Module = Module;
 
       const script = document.createElement("script");
-      // script.src = "/agc/agc.js";
       script.src = "/agc11.js";
       document.body.append(script);
     });
